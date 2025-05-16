@@ -1,0 +1,20 @@
+dbt_postgres:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      port: "{{ env_var('POSTGRES_PORT') | int }}"
+      dbname: "{{ env_var('POSTGRES_DBNAME') }}"
+      schema: "{{ env_var('POSTGRES_SCHEMA') }}"
+      threads: 4
+      keepalives_idle: 0
+      connect_timeout: 30
+      retries: 1
+      sslmode: "require"
+      # sslcert: "/etc/ssl/certs/ca-bundle.crt"
+      # sslkey: "/etc/ssl/private/postgresql.key"
+      # sslrootcert: "/etc/ssl/certs/ca-bundle.crt"
+      
