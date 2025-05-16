@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staged customer data with basic transformations
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: Customer's full name (first + last)
+      - name: signup_month
+        description: Month when the customer signed up
+
+  - name: stg_orders
+    description: Staged order data with calculated fields
+    columns:
+      - name: order_id
+        description: Unique identifier for the order
+        tests:
+          - unique
+          - not_null
+      - name: total_amount
+        description: Total amount for the order
+        tests:
+          - not_null
+
+  - name: int_customer_orders
+    description: Intermediate model combining customer and order data
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer
+        tests:
+          - unique
+          - not_null
+      - name: total_orders
+        description: Total number of orders for the customer
+      - name: total_spent
+        description: Total amount spent by the customer
+
+  - name: daily_sales
+    description: Daily sales analysis by product category
+    columns:
+      - name: sale_date
+        description: Date of the sales
+        tests:
+          - not_null
+      - name: category
+        description: Product category
+      - name: total_revenue
+        description: Total revenue for the day and category 
